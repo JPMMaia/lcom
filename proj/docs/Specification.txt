@@ -1,0 +1,82 @@
+Projecto de LCOM - t5g08
+- "TrapAlls"
+      Para o nosso projeto de LCOM propomo nos a desenvolver um jogo baseado no conceito de "prender" as bolas no menor espaço possível, até perfazer o total de espaço mínimo livre.
+As regras são:
+	Só é possivel desenhar linhas na vertical ou na horizontal, sendo que cada linha tem de ir obrigatoriamente de um lado do quadrado de jogo ao outro;
+	Se uma bola atravassesar ou tocar uma linha enquanto esta está a ser desenhada o jogador perde;
+	A partir do momento em que a linha acaba de ser desenhada passa a fazer parte dos limites do campo de jogo;
+	O jogador só vence quando consegue aprisionar as bolas e atingir o espaço mínimo que elas possuiem para circular;
+	As bolas só mudam de trajectória quando colidem contra uma parede;
+
+Multi jogador:
+	Neste modo jogadores diferentes competem para ver qual dos dois consegue acabar um nivel no menor tempo.
+
+Por último propomo nos a usar todos os laboratórios (tudo com interrupções excepto a porta de série que será usado em FIFO Polled):
+	Placa de video: destinado a fazer o display do jogo em si;
+	Timer: destinado a controlar a velocidade das bolas;
+	Teclado: destinado a iniciar/encerrar/pausar o jogo;
+	Rato: destinado a controlar os menus e desenhar as linhas do jogo;
+	RTC: destinado a disparar o alarme nos jogos com tempo e a guardar informaçoes sobre o tempo em que cada jogador acaba um jogo
+	Porta de Série: responsável por garantir o tráfego de informações de uma maquina virtual para outra (multi jogador);
+	
+
+Módulos / "Classes"
+
+1. SystemClass
+a. DispatcherClass
+b. GameLogicClass
+c. MenuClass
+2. ClockClass
+a. TimerClass
+b. RTCClass
+3. GraphicsClass
+a. SpriteClass
+4. InputClass
+a. KeyboardClass
+b. MouseClass
+5. SerialPortClass
+
+SystemClass
+	A SystemClass será uma "classe" que terá apontadores para todas as outras classes.
+Assim, esta "classe" tratará dos menus e de inicializar cada um dos módulos. Deste modo, este módulo reúne toda a informação e trata de iniciar, correr e encerrar o jogo.
+DispatcherClass
+	Este módulo estará encarregue de processar interrupções/eventos e chamar os respectivos handlers.
+GameLogicClass
+	Este módulo terá "métodos" para manipular a lógica do jogo.
+MenuClass
+	Esta "classe" tratará de toda a mecânica relacionada com os menus.
+ClockClass
+	A ClockClass será uma abstracção de um relógio. Esta classe comunicará com a TimerClass e com a RTCClass, de modo a permitir a visualização do tempo, definir alarmes, contagens decrescentes, etc.
+
+TimerClass
+	O propósito deste módulo é o de fazer a comunicação com o Timer em hardware. Terá "métodos" para mostrar a configuração, contar o tempo e definir a frequência do clock.
+RTCClass
+	Esta classe tem como função a comunicação com RTC, permitindo a configuração do alarme e o display da data actual.
+GraphicsClass
+	Neste módulo tratar-se-á da configuração da Video Card, do controlo dos pixéis no ecrã e se possível da inicialização da color pallette em VBE.
+SpriteClass
+	"Classe" dedicada à criação, manipulação e manutenção de Sprites a serem usados na GraphicsClass.
+InputClass
+	A InputClass fará a comunicação com a MouseClass e a KeyboardClass, visto que são duas formas de o utilizador comunicar com o programa. Se for necessário, neste módulo também terá "métodos" para validar certo tipo de input do utilizador.
+MouseClass
+	Módulo usado para a comunicação com o rato.
+KeyboardClass
+	Módulo usado para a comunicação com o teclado.
+SerialPortClass
+	Módulo usado para fazer a transmissão de dados entre duas Virtual Machines usando a porta de série.
+
+
+
+
+
+
+
+
+
+Plano
+1. Desenvolver a primeira versão executável, implementando a Video Card (GraphicsClass), o Counter (TimerClass e parte da ClockClass), e o rato (MouseClass e parte da InputClass).
+Data Prevista de Conclusão: 13ª aula laboratorial.
+2. Na segunda versão executável, pretendemos implementar o resto dos módulos (excepto a porta de série). O teclado terá apenas a função para seleccionar os menus, ou sair/pausar o jogo. Deste modo, pretende-se ter o jogo a correr com todas as funcionalidades, exceptuando o modo multi-jogador (que engloba a porta de série).
+Data Prevista de Conclusão: 28 de Dezembro de 2013.
+3. Por último, a versão final consistirá na versão completa do jogo, com modo multi-jogador e teclado com funcionalidades extra de modo a permitir este modo de jogo.
+Data Prevista de Conclusão: 3 de Janeiro de 2014.
