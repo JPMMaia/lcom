@@ -17,4 +17,4 @@ This project contains the source code of a series of projects made for the Minix
 ## Authors
 
 * **João Maia** - [JPMMaia](https://github.com/JPMMaia)
-* **José Oliveira**
+* **José Oliveira** - [ZPaulo](https://github.com/ZPaulo)
